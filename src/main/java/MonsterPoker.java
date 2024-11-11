@@ -53,10 +53,7 @@ public class MonsterPoker {
     IntStream.range(0, playerDeck.length) 
     .forEach(value -> this.playerDeck[value] = card.nextInt(5));
     // カードの表示
-    System.out.print("[Player]");
-    IntStream.range(0, playerDeck.length) 
-    .forEach(value -> System.out.printf("%s ", this.monsters[playerDeck[value]]);
-    System.out.println();
+    viewCards(Player, playerDeck);
 
     // カードの交換
     System.out.println("カードを交換する場合は1から5の数字（左から数えた位置を表す）を続けて入力してください．交換しない場合は0と入力してください");
@@ -65,24 +62,19 @@ public class MonsterPoker {
       for (int i = 0; i < exchange.length(); i++) {
         this.playerDeck[Character.getNumericValue(exchange.charAt(i)) - 1] = card.nextInt(5);
       }
-      // カードの表示
+      
       System.out.print("[Player]");
-      for (int i = 0; i < playerDeck.length; i++) {
-        System.out.printf("%s ", this.monsters[playerDeck[i]]);
-      }
-      System.out.println();
+      viewCards(playerDeck);
+
       System.out.println("もう一度カードを交換する場合は1から5の数字（左から数えた位置を表す）を続けて入力してください．交換しない場合は0と入力してください");
       exchange = scanner.nextLine();
       if (exchange.charAt(0) != '0') {
         for (int i = 0; i < exchange.length(); i++) {
           this.playerDeck[Character.getNumericValue(exchange.charAt(i)) - 1] = card.nextInt(5);
         }
-        // カードの表示
+        
         System.out.print("[Player]");
-        for (int i = 0; i < playerDeck.length; i++) {
-          System.out.printf("%s ", this.monsters[playerDeck[i]]);
-        }
-        System.out.println();
+        viewCards(playerDeck);
       }
     }
 
@@ -90,12 +82,9 @@ public class MonsterPoker {
     for (int i = 0; i < cpuDeck.length; i++) {
       this.cpuDeck[i] = card.nextInt(5);
     }
-    // カードの表示
+    
     System.out.print("[CPU]");
-    for (int i = 0; i < cpuDeck.length; i++) {
-      System.out.printf("%s ", this.monsters[cpuDeck[i]]);
-    }
-    System.out.println();
+    viewCards(cpuDeck)
 
     // 交換するカードの決定
     System.out.println("CPUが交換するカードを考えています・・・・・・");
@@ -139,12 +128,9 @@ public class MonsterPoker {
       for (int i = 0; i < c13.length(); i++) {
         this.cpuDeck[Character.getNumericValue(c13.charAt(i)) - 1] = card.nextInt(5);
       }
-      // カードの表示
+      
       System.out.print("[CPU]");
-      for (int i = 0; i < cpuDeck.length; i++) {
-        System.out.printf("%s ", this.monsters[cpuDeck[i]]);
-      }
-      System.out.println();
+      viewCards(cpuDeck)
     }
 
     // 交換するカードの決定
@@ -186,18 +172,31 @@ public class MonsterPoker {
 
     // カードの交換
     if (c13.charAt(0) != '0') {
-      for (int i = 0; i < c13.length(); i++) {
-        this.cpuDeck[Character.getNumericValue(c13.charAt(i)) - 1] = card.nextInt(5);
-      }
-      // カードの表示
-      System.out.print("[CPU]");
-      for (int i = 0; i < cpuDeck.length; i++) {
-        System.out.printf("%s ", this.monsters[cpuDeck[i]]);
-      }
+      IntStream.range(0, c13.length) 
+      .forEach(value -> this.cpuDeck[Character.getNumericValue(c13.charAt(value)) - 1] = card.nextInt(5));
+
+      viewCards(CPU, cpuDeck);
+  }
+  
+  # カードの表示
+  public void viewCards(String drawer, Int Deck[]) {
+      System.out.print("[%s]", drawer);
+      IntStream.range(0, Deck.length) 
+      .forEach(value -> System.out.printf("%s ", this.monsters[Deck[value]]);
       System.out.println();
-    }
   }
 
+  # カードの交換
+  public Int exchangeCards(String drawer, String exchangeCardComb, Int Deck){
+    if (exchangeCardComb.charAt(0) != '0') {
+      IntStream.range(0, exchangeCardComb.length) 
+      .forEach(value -> this.Deck[Character.getNumericValue(exchangeCardComb.charAt(value)) - 1] = card.nextInt(5));
+
+      viewCards(CPU, Deck);
+      return (Deck);
+    }
+  } 
+ 
   public void battlePhase() throws InterruptedException {
     // Playerの役の判定
     // 役判定用配列の初期化

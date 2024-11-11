@@ -50,14 +50,12 @@ public class MonsterPoker {
   public void drawPhase(Scanner scanner) throws InterruptedException {
     // 初期Draw
     System.out.println("PlayerのDraw！");
-    for (int i = 0; i < playerDeck.length; i++) {
-      this.playerDeck[i] = card.nextInt(5);
-    }
+    IntStream.range(0, playerDeck.length) 
+    .forEach(value -> this.playerDeck[value] = card.nextInt(5));
     // カードの表示
     System.out.print("[Player]");
-    for (int i = 0; i < playerDeck.length; i++) {
-      System.out.printf("%s ", this.monsters[playerDeck[i]]);
-    }
+    IntStream.range(0, playerDeck.length) 
+    .forEach(value -> System.out.printf("%s ", this.monsters[playerDeck[value]]);
     System.out.println();
 
     // カードの交換

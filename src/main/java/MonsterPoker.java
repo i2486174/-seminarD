@@ -53,7 +53,7 @@ public class MonsterPoker {
     IntStream.range(0, playerDeck.length) 
     .forEach(value -> this.playerDeck[value] = card.nextInt(5));
     // カードの表示
-    viewCards(Player, playerDeck);
+    viewCards("Player", playerDeck);
 
     // カードの交換
     System.out.println("カードを交換する場合は1から5の数字（左から数えた位置を表す）を続けて入力してください．交換しない場合は0と入力してください");
@@ -63,8 +63,7 @@ public class MonsterPoker {
         this.playerDeck[Character.getNumericValue(exchange.charAt(i)) - 1] = card.nextInt(5);
       }
       
-      System.out.print("[Player]");
-      viewCards(playerDeck);
+      viewCards("Player", playerDeck);
 
       System.out.println("もう一度カードを交換する場合は1から5の数字（左から数えた位置を表す）を続けて入力してください．交換しない場合は0と入力してください");
       exchange = scanner.nextLine();
@@ -73,8 +72,7 @@ public class MonsterPoker {
           this.playerDeck[Character.getNumericValue(exchange.charAt(i)) - 1] = card.nextInt(5);
         }
         
-        System.out.print("[Player]");
-        viewCards(playerDeck);
+        viewCards("Player", playerDeck);
       }
     }
 
@@ -83,8 +81,7 @@ public class MonsterPoker {
       this.cpuDeck[i] = card.nextInt(5);
     }
     
-    System.out.print("[CPU]");
-    viewCards(cpuDeck)
+    viewCards("CPU", cpuDeck)
 
     // 交換するカードの決定
     System.out.println("CPUが交換するカードを考えています・・・・・・");
@@ -129,8 +126,7 @@ public class MonsterPoker {
         this.cpuDeck[Character.getNumericValue(c13.charAt(i)) - 1] = card.nextInt(5);
       }
       
-      System.out.print("[CPU]");
-      viewCards(cpuDeck)
+      viewCards("CPU", cpuDeck)
     }
 
     // 交換するカードの決定
@@ -171,19 +167,14 @@ public class MonsterPoker {
     System.out.println(this.c13);
 
     // カードの交換
-    if (c13.charAt(0) != '0') {
-      IntStream.range(0, c13.length) 
-      .forEach(value -> this.cpuDeck[Character.getNumericValue(c13.charAt(value)) - 1] = card.nextInt(5));
-
-      viewCards(CPU, cpuDeck);
-  }
+    cpuDeck = exchangeCards("CPU", c13, cpuDeck);
   
-  # カードの表示
-  public void viewCards(String drawer, Int Deck[]) {
-      System.out.print("[%s]", drawer);
-      IntStream.range(0, Deck.length) 
-      .forEach(value -> System.out.printf("%s ", this.monsters[Deck[value]]);
-      System.out.println();
+    # カードの表示
+    public void viewCards(String drawer, Int Deck[]) {
+        System.out.print("[%s]", drawer);
+        IntStream.range(0, Deck.length) 
+        .forEach(value -> System.out.printf("%s ", this.monsters[Deck[value]]);
+        System.out.println();
   }
 
   # カードの交換
@@ -193,7 +184,7 @@ public class MonsterPoker {
       .forEach(value -> this.Deck[Character.getNumericValue(exchangeCardComb.charAt(value)) - 1] = card.nextInt(5));
 
       viewCards(CPU, Deck);
-      return (Deck);
+      return Deck;
     }
   } 
  

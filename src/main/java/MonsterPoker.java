@@ -52,35 +52,29 @@ public class MonsterPoker {
     System.out.println("PlayerのDraw！");
     IntStream.range(0, playerDeck.length) 
     .forEach(value -> this.playerDeck[value] = card.nextInt(5));
-    // カードの表示
+    
     viewCards("Player", playerDeck);
 
     // カードの交換
     System.out.println("カードを交換する場合は1から5の数字（左から数えた位置を表す）を続けて入力してください．交換しない場合は0と入力してください");
     String exchange = scanner.nextLine();
     if (exchange.charAt(0) != '0') {
-      for (int i = 0; i < exchange.length(); i++) {
-        this.playerDeck[Character.getNumericValue(exchange.charAt(i)) - 1] = card.nextInt(5);
-      }
-      
+      IntStream.range(0, exchange.length) 
+        .forEach(value -> this.playerDeck[Character.getNumericValue(exchange.charAt(value)) - 1] = card.nextInt(5));
       viewCards("Player", playerDeck);
 
       System.out.println("もう一度カードを交換する場合は1から5の数字（左から数えた位置を表す）を続けて入力してください．交換しない場合は0と入力してください");
       exchange = scanner.nextLine();
       if (exchange.charAt(0) != '0') {
-        for (int i = 0; i < exchange.length(); i++) {
-          this.playerDeck[Character.getNumericValue(exchange.charAt(i)) - 1] = card.nextInt(5);
-        }
-        
+        IntStream.range(0, exchange.length) 
+        .forEach(value -> this.playerDeck[Character.getNumericValue(exchange.charAt(value)) - 1] = card.nextInt(5));
         viewCards("Player", playerDeck);
       }
     }
 
     System.out.println("CPUのDraw！");
-    for (int i = 0; i < cpuDeck.length; i++) {
-      this.cpuDeck[i] = card.nextInt(5);
-    }
-    
+    IntStream.range(0, cpuDeck.length) 
+        .forEach(value -> this.cpuDeck[value] = card.nextInt(5));
     viewCards("CPU", cpuDeck)
 
     // 交換するカードの決定
@@ -90,9 +84,8 @@ public class MonsterPoker {
     // 0,1,0,2,3 といったcpuDeckの場合，2枚目，4枚目，5枚目のカードをそれぞれ交換するかどうか決定し，例えば24といった形で決定する
     // 何番目のカードを交換するかを0,1で持つ配列の初期化
     // 例えばcpuExchangeCards[]が{0,1,1,0,0}の場合は2,3枚目を交換の候補にする
-    for (int i = 0; i < this.cpuExchangeCards.length; i++) {
-      this.cpuExchangeCards[i] = -1;
-    }
+    IntStream.range(0, cpuExchangeCards.length) 
+        .forEach(value -> this.cpuExchangeCards[value] = -1);
     for (int i = 0; i < this.cpuDeck.length; i++) {
       if (this.cpuExchangeCards[i] == -1) {
         for (int j = i + 1; j < this.cpuDeck.length; j++) {
@@ -120,14 +113,8 @@ public class MonsterPoker {
     }
     System.out.println(this.c13);
 
-    // カードの交換
-    if (c13.charAt(0) != '0') {
-      for (int i = 0; i < c13.length(); i++) {
-        this.cpuDeck[Character.getNumericValue(c13.charAt(i)) - 1] = card.nextInt(5);
-      }
-      
-      viewCards("CPU", cpuDeck)
-    }
+
+    cpuDeck = exchangeCards("CPU", c13, cpuDeck);
 
     // 交換するカードの決定
     System.out.println("CPUが交換するカードを考えています・・・・・・");
@@ -136,9 +123,8 @@ public class MonsterPoker {
     // 0,1,0,2,3 といったcpuDeckの場合，2枚目，4枚目，5枚目のカードをそれぞれ交換するかどうか決定し，例えば24といった形で決定する
     // 何番目のカードを交換するかを0,1で持つ配列の初期化
     // 例えばcpuExchangeCards[]が{0,1,1,0,0}の場合は2,3枚目を交換の候補にする
-    for (int i = 0; i < this.cpuExchangeCards.length; i++) {
-      this.cpuExchangeCards[i] = -1;
-    }
+    IntStream.range(0, cpuExchangeCards.length) 
+        .forEach(value -> this.cpuExchangeCards[value] = -1);
     for (int i = 0; i < this.cpuDeck.length; i++) {
       if (this.cpuExchangeCards[i] == -1) {
         for (int j = i + 1; j < this.cpuDeck.length; j++) {
@@ -166,38 +152,33 @@ public class MonsterPoker {
     }
     System.out.println(this.c13);
 
-    // カードの交換
     cpuDeck = exchangeCards("CPU", c13, cpuDeck);
   
-    # カードの表示
     public void viewCards(String drawer, Int Deck[]) {
         System.out.print("[%s]", drawer);
         IntStream.range(0, Deck.length) 
         .forEach(value -> System.out.printf("%s ", this.monsters[Deck[value]]);
         System.out.println();
-  }
-
-  # カードの交換
-  public Int exchangeCards(String drawer, String exchangeCardComb, Int Deck){
-    if (exchangeCardComb.charAt(0) != '0') {
-      IntStream.range(0, exchangeCardComb.length) 
-      .forEach(value -> this.Deck[Character.getNumericValue(exchangeCardComb.charAt(value)) - 1] = card.nextInt(5));
-
-      viewCards(CPU, Deck);
-      return Deck;
     }
-  } 
+
+    public Int exchangeCards(String drawer, String exchangeCardComb, Int Deck){
+      if (exchangeCardComb.charAt(0) != '0') {
+        IntStream.range(0, exchangeCardComb.length) 
+        .forEach(value -> this.Deck[Character.getNumericValue(exchangeCardComb.charAt(value)) - 1] = card.nextInt(5));
+
+        viewCards(CPU, Deck);
+      }
+      return Deck;
+    } 
  
   public void battlePhase() throws InterruptedException {
     // Playerの役の判定
     // 役判定用配列の初期化
-    for (int i = 0; i < playerYaku.length; i++) {
-      this.playerYaku[i] = 0;
-    }
+    IntStream.range(0, playerYaku.length) 
+        .forEach(value -> this.playerYaku[value] = 0);
     // モンスターカードが何が何枚あるかをplayerYaku配列に登録
-    for (int i = 0; i < playerDeck.length; i++) {
-      this.playerYaku[this.playerDeck[i]]++;
-    }
+    IntStream.range(0, playerDeck.length) 
+        .forEach(value -> this.playerYaku[this.playerDeck[value]]++);
     // 役判定
     // 5が1つある：ファイブ
     // 4が1つある：フォー

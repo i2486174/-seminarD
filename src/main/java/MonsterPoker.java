@@ -255,8 +255,8 @@ public class MonsterPoker {
 
     // CPUの役の判定
     // 役判定用配列の初期化
-    for (int i = 0; i < cpuYaku.length; i++) {
-      this.cpuYaku[i] = 0;
+    InStream.range(0,cpuYaku.length) {
+      .forEach(value -> this.cpuYaku[value] = 0);
     }
     // モンスターカードが何が何枚あるかをcpuYaku配列に登録
     for (int i = 0; i < cpuDeck.length; i++) {
